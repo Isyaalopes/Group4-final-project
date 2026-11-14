@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvin Espina — Finals Activities</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>GROUP 4 FINAL PROJECT</h1>
+    </header>
+
+    <div class="member-page-container">
+        <div class="member-profile-header">
+            <img src="photo-marvin.jpg" alt="Marvin Espina" class="member-avatar">
+            <h2>Marvin Espina</h2>
+            <p class="role">UI Designer & Front-End Developer</p>
+        </div>
+
+        <div class="exercise-container" id="finals-ex1">
+            <h2>FINALS Lab Exercises #1 — JSON</h2>
+            <h3>Lab 1 — PHP Array to JSON</h3>
+            <h3>PHP Code:</h3>
+            <div class="code-block">
+&lt;?php
+    $student = [
+        "name" =&gt; "Marvin Espina",
+        "age" =&gt; 22,
+        "course" =&gt; "BSIT"
+    ];
+
+    $json_output = json_encode($student);
+    echo $json_output;
+?&gt;
+            </div>
+            <h3>Output:</h3>
+            <div class="output-grid">
+                <div class="output-item">
+                    <img src="marvin-ex1-lab1.jpg" alt="Lab 1 Output">
+                    <p>Lab 1 Output</p>
+                </div>
+            </div>
+
+            <h3>Lab 2 — JSON Decode (Object vs Array)</h3>
+            <h3>PHP Code:</h3>
+            <div class="code-block">
+&lt;?php
+    $json_string = '{"name":"Marvin Espina","age":22,"email":"marvinespina@gmail.com"}';
+
+    $student_object = json_decode($json_string);
+    $student_array = json_decode($json_string, true);
+
+    echo "Object: " . $student_object-&gt;name . "&lt;br&gt;";
+    echo "Array: " . $student_array['email'];
+?&gt;
+            </div>
+            <h3>Output:</h3>
+            <div class="output-grid">
+                <div class="output-item">
+                    <img src="marvin-ex1-lab2.jpg" alt="Lab 2 Output">
+                    <p>Lab 2 Output</p>
+                </div>
+            </div>
+
+            <h3>Lab 3 — JSON Response with Header</h3>
+            <h3>PHP Code:</h3>
+            <div class="code-block">
+&lt;?php
+header('Content-Type: application/json');
+
+    $profile = [
+        "id" =&gt; 1,
+        "name" =&gt; "Marvin Espina",
+        "email" =&gt; "marvinespina@gmail.com",
+        "status" =&gt; "active"
+    ];
+
+    echo json_encode($profile);
+?&gt;
+            </div>
+            <h3>Output:</h3>
+            <div class="output-grid">
+                <div class="output-item">
+                    <img src="marvin-ex1-lab3.jpg" alt="Lab 3 Output">
+                    <p>Lab 3 Output</p>
+                </div>
+            </div>
+
+            <h3>Lab 4 — Sending JSON via Fetch POST</h3>
+            <h3>Part A: lab4_input.php</h3>
+            <div class="code-block">
+&lt;?php
+    $input_data = file_get_contents('php://input');
+
+    $received = json_decode($input_data, true);
+
+    echo "Username: " . $received['username'] . "&lt;br&gt;";
+    echo "Password: " . $received['password'];
+?&gt;
+            </div>
+
+            <h3>Part B: HTML / JavaScript (Test Page)</h3>
+            <div class="code-block">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Test Lab 4&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="output"&gt;&lt;/div&gt;
+
+    &lt;script&gt;
+        fetch('lab4_input.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                username: 'admin',
+                password: '1234'
+            })
+        })
+        .then(response =&gt; response.text())
+        .then(result =&gt; {
+            document.getElementById('output').innerHTML = result;
+        })
+        .catch(error =&gt; {
+            document.getElementById('output').innerHTML = 'Error: ' + error.message;
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </div>
+            <h3>Output:</h3>
+            <div class="output-grid">
+                <div class="output-item">
+                    <img src="marvin-ex1-lab4.jpg" alt="Lab 4 Output">
+                    <p>Lab 4 Output</p>
+                </div>
+            </div>
+
+
+            <h3>Lab 5 — AJAX Form with JSON Response</h3>
+            
+            <h3>File 1: lab5_frontend.html</h3>
+            <div class="code-block">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Lab 5 - PHP + JSON + AJAX&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2&gt;Send Data to PHP with AJAX&lt;/h2&gt;
+
+    &lt;form id="userForm"&gt;
+        &lt;label&gt;Your Name:&lt;/label&gt;
+        &lt;input type="text" id="nameInput" required placeholder="Enter your name"&gt;
+
+        &lt;button type="submit"&gt;Send to Server&lt;/button&gt;
+    &lt;/form&gt;
+
+    &lt;div id="result"&gt;&lt;/div&gt;
+
+    &lt;script&gt;
+        const form = document.getElementById('userForm');
+        const resultDiv = document.getElementById('result');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); 
+
+            const name = document.getElementById('nameInput').value.trim();
+
+            fetch('lab5_backend.php', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ fullname: name })
+            })
+            .then(response =&gt; response.json())
+            .then(data =&gt; {
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = `
+                    &lt;strong&gt;Status:&lt;/strong&gt; ${data.status}&lt;br&gt;
+                    &lt;strong&gt;Message:&lt;/strong&gt; ${data.message}
+                `;
+            })
+            .catch(error =&gt; {
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = `&lt;span class="error-text"&gt;Error: ${error.message}&lt;/span&gt;`;
+            });
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </div>
+
+            <h3>File 2: lab5_backend.php</h3>
+            <div class="code-block">
+&lt;?php
+header('Content-Type: application/json');
+
+$input = file_get_contents('php://input');
+$data = json_decode($input, true);
+
+$username = $data['fullname'] ?? 'Guest';
+
+$response = [
+    "status" =&gt; "SUCCESS!",
+    "message" =&gt; "Welcome, " . $username . "!"
+];
+
+echo json_encode($response);
+?&gt;
+            </div>
+
+            <h3>File 3: style.css</h3>
+            <div class="code-block">
+:root {
+    --dark-navy: #091540;
+    --primary-blue: #1B2CC1;
+    --light-blue: #7692FF;
+    --pale-blue: #ABD2FA;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 0 20px;
+    background-color: #ffffff;
+    color: var(--dark-navy);
+}
+
+h2 {
+    color: var(--dark-navy);
+    border-bottom: 3px solid var(--primary-blue);
+    padding-bottom: 10px;
+    margin-bottom: 24px;
+}
+
+form {
+    background: #f4f4f4;
+    padding: 25px;
+    border-radius: 8px;
+}
+
+label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 0 0 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 15px;
+}
+
+button {
+    background-color: var(--primary-blue);
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--light-blue);
+    color: var(--dark-navy);
+}
+
+#result {
+    margin-top: 20px;
+    padding: 18px;
+    border-radius: 6px;
+    background-color: var(--pale-blue);
+    display: none;
+    line-height: 1.8;
+}
+
+#result strong {
+    color: var(--primary-blue);
+}
+
+.error-text {
+    color: #d32f2f;
+    font-weight: 600;
+}
+            </div>
+
+            <h3>Output:</h3>
+            <div class="output-grid">
+                <div class="output-item">
+                    <img src="marvin-ex1-lab5-1.jpg" alt="Lab 5 Form">
+                    <p>Lab 5 — Form</p>
+                </div>
+                <div class="output-item">
+                    <img src="marvin-ex1-lab5-2.jpg" alt="Lab 5 Response">
+                    <p>Lab 5 — Response</p>
+                </div>
+            </div>
+
+            <a href="#" class="back-btn">↑ Back to Top</a>
+        </div>
+
+        <!-- FINALS EXERCISE #2 — XMLHttpRequest -->
+        <div class="exercise-container" id="finals-ex2">
+            <h2>FINALS Lab Exercise #2 — Exploring XMLHttpRequest</h2>
+
+            <h3>HTML & JavaScript Code:</h3>
+            <div class="code-block">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Lab Exercise 2 — XMLHttpRequest&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2&gt;Exploring XMLHttpRequest&lt;/h2&gt;
+
+    &lt;button id="loadData"&gt;Load Post Data&lt;/button&gt;
+
+    &lt;div id="output"&gt;
+        Click the button above to load content...
+    &lt;/div&gt;
+
+    &lt;script&gt;
+        const loadBtn = document.getElementById('loadData');
+        const outputDiv = document.getElementById('output');
+        const apiEndpoint = 'https://jsonplaceholder.typicode.com/posts/1';
+
+        loadBtn.addEventListener('click', fetchPost);
+
+        function fetchPost() {
+            const xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        try {
+                            const postData = JSON.parse(xhr.responseText);
+                            outputDiv.innerHTML = `
+                                &lt;strong&gt;Post Title:&lt;/strong&gt;&lt;br&gt;
+                                ${postData.title}
+                                &lt;br&gt;&lt;br&gt;
+                                &lt;strong&gt;Post Body:&lt;/strong&gt;&lt;br&gt;
+                                ${postData.body}
+                            `;
+                        } catch (err) {
+                            outputDiv.innerHTML = `&lt;span class="error-text"&gt;Failed to parse server response.&lt;/span&gt;`;
+                        }
+                    } else {
+                        outputDiv.innerHTML = `&lt;span class="error-text"&gt;
+                            Request failed — Status ${xhr.status}: ${xhr.statusText}
+                        &lt;/span&gt;`;
+                    }
+                }
+            };
+
+            xhr.open('GET', apiEndpoint, true);
+            xhr.send();
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </div>
+
+            <h3>CSS Code:</h3>
+            <div class="code-block">
+:root {
+    --dark-navy: #091540;
+    --primary-blue: #1B2CC1;
+    --light-blue: #7692FF;
+    --pale-blue: #ABD2FA;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 720px;
+    margin: 40px auto;
+    padding: 0 24px;
+    background-color: var(--pale-blue);
+    color: var(--dark-navy);
+}
+
+h2 {
+    color: var(--dark-navy);
+    border-bottom: 3px solid var(--primary-blue);
+    padding-bottom: 10px;
+    margin-bottom: 24px;
+}
+
+#loadData {
+    background-color: var(--primary-blue);
+    color: #ffffff;
+    border: none;
+    padding: 12px 28px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#loadData:hover {
+    background-color: var(--light-blue);
+    color: var(--dark-navy);
+}
+
+#output {
+    margin-top: 24px;
+    border: 2px solid var(--light-blue);
+    padding: 20px;
+    border-radius: 6px;
+    background-color: #ffffff;
+    line-height: 1.8;
+    min-height: 100px;
+}
+
+#output strong {
+    color: var(--primary-blue);
+}
+
+.error-text {
+    color: #d32f2f;
+    font-weight: 600;
+}
+            </div>
+
+            <h3>Output:</h3>
+            <div class="output-grid">
+                <div class="output-item">
+                    <img src="marvin-ex2-1.jpg" alt="Before Clicking">
+                    <p>Before Clicking</p>
+                </div>
+                <div class="output-item">
+                    <img src="marvin-ex2-2.jpg" alt="Data Loaded">
+                    <p>Data Loaded</p>
+                </div>
+            </div>
+
+            <a href="#" class="back-btn">↑ Back to Top</a>
+        </div>
+
+
+        <!-- FINALS EXERCISE #3 — Fetch API -->
+        <div class="exercise-container" id="finals-ex3">
+            <h2>FINALS Lab Exercise #3 — Exploring the Fetch API</h2>
+
+            <h3>HTML & JavaScript Code:</h3>
+            <div class="code-block">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Lab Exercise 3 — Fetch API&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2&gt;Exploring the Fetch API&lt;/h2&gt;
+
+    &lt;button id="loadData"&gt;Load Post Data&lt;/button&gt;
+    &lt;button id="createPost"&gt;Create New Post&lt;/button&gt;
+
+    &lt;div id="output"&gt;
+        Click a button above to begin...
+    &lt;/div&gt;
+
+    &lt;script&gt;
+        const outputDiv = document.getElementById('output');
+        const loadBtn = document.getElementById('loadData');
+        const createBtn = document.getElementById('createPost');
+
+        const getLink = 'https://jsonplaceholder.typicode.com/posts/1';
+        const postLink = 'https://jsonplaceholder.typicode.com/posts';
+
+        loadBtn.addEventListener('click', () =&gt; {
+            outputDiv.textContent = 'Loading post...';
+
+            fetch(getLink)
+                .then(res =&gt; {
+                    if (!res.ok) throw new Error(`Status ${res.status}`);
+                    return res.json();
+                })
+                .then(data =&gt; {
+                    outputDiv.innerHTML = `
+                        &lt;strong&gt;Post Title:&lt;/strong&gt;&lt;br&gt;
+                        ${data.title}
+                        &lt;br&gt;&lt;br&gt;
+                        &lt;strong&gt;Content:&lt;/strong&gt;&lt;br&gt;
+                        ${data.body}
+                    `;
+                })
+                .catch(err =&gt; {
+                    outputDiv.innerHTML = `&lt;span class="error-text"&gt;Error: ${err.message}&lt;/span&gt;`;
+                });
+        });
+
+        createBtn.addEventListener('click', () =&gt; {
+            outputDiv.textContent = 'Sending new post...';
+
+            const newPost = {
+                title: "My New Post",
+                body: "Learning Fetch API is fun!",
+                userId: 1
+            };
+
+            fetch(postLink, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newPost)
+            })
+                .then(res =&gt; {
+                    if (!res.ok) throw new Error(`Status ${res.status}`);
+                    return res.json();
+                })
+                .then(data =&gt; {
+                    outputDiv.innerHTML = `
+                        &lt;span class="success-text"&gt;New Post Created!&lt;/span&gt;
+                        &lt;br&gt;&lt;br&gt;
+                        &lt;strong&gt;Post ID:&lt;/strong&gt; ${data.id}
+                    `;
+                })
+                .catch(err =&gt; {
+                    outputDiv.innerHTML = `&lt;span class="error-text"&gt;Error: ${err.message}&lt;/span&gt;`;
+                });
+        });
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </div>
+
+            <h3>CSS Code:</h3>
+            <div class="code-block">
+:root {
+    --dark-navy: #091540;
+    --primary-blue: #1B2CC1;
+    --light-blue: #7692FF;
+    --pale-blue: #ABD2FA;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 720px;
+    margin: 40px auto;
+    padding: 0 24px;
+    background-color: var(--pale-blue);
+    color: var(--dark-navy);
+}
+
+h2 {
+    color: var(--dark-navy);
+    border-bottom: 3px solid var(--primary-blue);
+    padding-bottom: 10px;
+    margin-bottom: 24px;
+}
+
+#loadData, #createPost {
+    background-color: var(--primary-blue);
+    color: #ffffff;
+    border: none;
+    padding: 12px 28px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 12px;
+    margin-bottom: 12px;
+}
+
+#loadData:hover, #createPost:hover {
+    background-color: var(--light-blue);
+    color: var(--dark-navy);
+}
+
+#output {
+    border: 2px solid var(--light-blue);
+    padding: 20px;
+    border-radius: 6px;
+    background-color: #ffffff;
+    line-height: 1.8;
+    min-height: 100px;
+}
+
+#output strong {
+    color: var(--primary-blue);
+}
+
+.error-text {
+    color: #d32f2f;
+    font-weight: 600;
+}
+
+.success-text {
+    color: #2e7d32;
+    font-weight: 600;
+}
+            </div>
+
+            <h3>Output:</h3>
+            <div class="output-grid">
+                <div class="output-item">
+                    <img src="marvin-ex3-1.jpg" alt="GET — Load Post Data">
+                    <p>GET — Load Post Data</p>
+                </div>
+                <div class="output-item">
+                    <img src="marvin-ex3-2.jpg" alt="POST — Create New Post">
+                    <p>POST — Create New Post</p>
+                </div>
+            </div>
+
+            <a href="#" class="back-btn">↑ Back to Top</a>
+        </div>
+
+        <!-- FINALS EXERCISE #4 — XML -->
+        <div class="exercise-container" id="finals-ex4">
+            <h2>FINALS Lab Exercise #4 — Exploring XML</h2>
+
+            <h3>XML Code:</h3>
+            <div class="code-block">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;students&gt;
+  &lt;student&gt;
+    &lt;id&gt;001&lt;/id&gt;
+    &lt;name&gt;Maria Santos&lt;/name&gt;
+    &lt;course&gt;BSIT&lt;/course&gt;
+    &lt;year&gt;3&lt;/year&gt;
+  &lt;/student&gt;
+  &lt;student&gt;
+    &lt;id&gt;002&lt;/id&gt;
+    &lt;name&gt;Jose Cruz&lt;/name&gt;
+    &lt;course&gt;BSCS&lt;/course&gt;
+    &lt;year&gt;2&lt;/year&gt;
+  &lt;/student&gt;
+  &lt;student&gt;
+    &lt;id&gt;003&lt;/id&gt;
+    &lt;name&gt;Marvin Espina&lt;/name&gt;
+    &lt;course&gt;BSIT&lt;/course&gt;
+    &lt;year&gt;3&lt;/year&gt;
+  &lt;/student&gt;
+&lt;/students&gt;
+            </div>
+
+            <a href="#" class="back-btn">↑ Back to Top</a>
+        </div>
+        <a href="index.html" class="back-link">← Back to Main Page</a>
+    </div>
+
+</body>
+</html>

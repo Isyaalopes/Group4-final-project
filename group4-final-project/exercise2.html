@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 2 - HTML/CSS/JavaScript/PHP</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>GROUP 4 FINAL PROJECT</h1>
+    </header>
+
+    <div class="exercise-container">
+        <h2>Exercise #2 - HTML/CSS/JavaScript/PHP</h2>
+
+        <h3>HTML Code:</h3>
+        <div class="code-block">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Group Page Login&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;div class="card" id="loginBox"&gt;
+        &lt;h2 class="title"&gt;Login&lt;/h2&gt;
+        &lt;input type="text" id="username" placeholder="Username"&gt;
+        &lt;input type="password" id="password" placeholder="Password"&gt;
+        &lt;button onclick="login()" class="btn"&gt;Sign In&lt;/button&gt;
+        &lt;p id="errorMsg" class="error"&gt;&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class="card" id="welcomeBox" style="display:none;"&gt;
+        &lt;h2 class="welcome-text"&gt;Welcome To Our Group Page!&lt;/h2&gt;
+        &lt;button onclick="logout()" class="btn"&gt;Logout&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </div>
+
+        <h3>CSS Code:</h3>
+        <div class="code-block">
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #B2E8E5 0%, #F8D7E2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    background: #ffffff;
+    width: 320px;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.title {
+    color: #222222;
+    margin-bottom: 25px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+input {
+    width: 100%;
+    padding: 13px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #577E89;
+}
+
+.btn {
+    width: 100%;
+    padding: 13px;
+    background: linear-gradient(90deg, #6F9F9C 0%, #F8D7E2 100%);
+    color: #222;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.error {
+    color: #dc3545;
+    font-size: 13px;
+    margin-top: 12px;
+}
+
+.welcome-text {
+    color: #222;
+    line-height: 1.5;
+}
+        </div>
+
+        <h3>JavaScript Code:</h3>
+        <div class="code-block">
+const correctUser = "Group4";
+const correctPass = "101010";
+
+function login() {
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+    let errorMsg = document.getElementById("errorMsg");
+
+    if (username === correctUser && password === correctPass) {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("welcomeBox").style.display = "block";
+        errorMsg.textContent = "";
+    } else {
+        errorMsg.textContent = "Invalid username or password";
+    }
+}
+
+function logout() {
+    document.getElementById("welcomeBox").style.display = "none";
+    document.getElementById("loginBox").style.display = "block";
+    
+    document.getElementById("username").value = "";
+    document.getElementById("password").value = "";
+    document.getElementById("errorMsg").textContent = "";
+}
+        </div>
+
+        <h3>Output:</h3>
+        <div class="output-grid">
+            <div class="output-item">
+                <img src="ex2-output-1.jpg" alt="Output 1 - Login Form">
+                <p>Login Form</p>
+            </div>
+            <div class="output-item">
+                <img src="ex2-output-2.jpg" alt="Output 2 - Welcome Page">
+                <p>Welcome Page</p>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-btn">← Back to Activities</a>
+    </div>
+
+</body>
+</html>

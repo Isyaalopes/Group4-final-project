@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ysabel Lozada — Finals Activities</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>GROUP 4 FINAL PROJECT</h1>
+    </header>
+
+    <div class="member-page-container">
+        <div class="member-profile-header">
+            <img src="photo-ysabel.jpg" alt="Ysabel Lozada" class="member-avatar">
+            <h2>Ysabel Lozada</h2>
+            <p class="role">QA Tester</p>
+        </div>
+
+        <!-- FINALS EXERCISE #2 — XMLHttpRequest -->
+        <div class="exercise-container" id="ysabel-finals-ex2">
+            <h2>FINALS Lab Exercise #2 — XMLHttpRequest</h2>
+
+            <h3>HTML & JavaScript Code:</h3>
+            <div class="code-block">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;XMLHttpRequest Lab&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;h2&gt;Exploring XMLHttpRequest&lt;/h2&gt;
+  
+  &lt;button id="loadData"&gt;Load Post Data&lt;/button&gt;
+  &lt;div id="output" style="margin-top: 20px; border: 1px solid #ddd; padding: 10px;"&gt;&lt;/div&gt;
+
+  &lt;script&gt;
+    document.getElementById("loadData").addEventListener("click", function() {
+      const xhr = new XMLHttpRequest();
+
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          const output = document.getElementById("output");
+          if (xhr.status === 200) {
+            const data = JSON.parse(xhr.responseText);
+            output.innerHTML = `
+              &lt;strong&gt;Post Title:&lt;/strong&gt; ${data.title}&lt;br&gt;&lt;br&gt;
+              &lt;strong&gt;Content:&lt;/strong&gt; ${data.body}
+            `;
+          } else {
+            output.innerHTML = `&lt;span style="color:red;"&gt;Error: ${xhr.status} - ${xhr.statusText}&lt;/span&gt;`;
+          }
+        }
+      };
+
+      xhr.open("GET", "https://jsonplaceholder.typicode.com/posts/1", true);
+      xhr.send();
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </div>
+
+            <a href="#" class="back-btn">↑ Back to Top</a>
+        </div>
+
+        <!-- FINALS EXERCISE #3 — Fetch API -->
+        <div class="exercise-container" id="ysabel-finals-ex3">
+            <h2>FINALS Lab Exercise #3 — Exploring the Fetch API</h2>
+
+            <h3>HTML & JavaScript Code:</h3>
+            <div class="code-block">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Fetch API Demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h2&gt;Exploring the Fetch API&lt;/h2&gt;
+  &lt;button id="loadData"&gt;Load Post Data (GET)&lt;/button&gt;
+  &lt;button id="createPost" style="margin-left:10px;"&gt;Create New Post (POST)&lt;/button&gt;
+  
+  &lt;div id="output" style="margin-top: 20px; border: 1px solid #ccc; padding: 10px;"&gt;&lt;/div&gt;
+
+  &lt;script&gt;
+    const output = document.getElementById("output");
+
+    // GET Request
+    document.getElementById("loadData").addEventListener("click", function() {
+      fetch("https://jsonplaceholder.typicode.com/posts/1")
+        .then(response =&gt; {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data =&gt; {
+          output.innerHTML = `
+            &lt;strong&gt;Post Title:&lt;/strong&gt; ${data.title}&lt;br&gt;&lt;br&gt;
+            &lt;strong&gt;Content:&lt;/strong&gt; ${data.body}
+          `;
+        })
+        .catch(error =&gt; {
+          output.innerHTML = `&lt;span style="color:red;"&gt;Error: ${error.message}&lt;/span&gt;`;
+        });
+    });
+
+    // POST Request
+    document.getElementById("createPost").addEventListener("click", function() {
+      fetch("https://jsonplaceholder.typicode.com/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          title: "My New Post",
+          body: "Learning Fetch API is fun!",
+          userId: 1
+        })
+      })
+      .then(response =&gt; {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data =&gt; {
+        output.innerHTML = `
+          &lt;strong&gt;New Post Created!&lt;/strong&gt;&lt;br&gt;
+          Post ID: ${data.id}
+        `;
+      })
+      .catch(error =&gt; {
+        output.innerHTML = `&lt;span style="color:red;"&gt;Error: ${error.message}&lt;/span&gt;`;
+      });
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+            </div>
+
+            <a href="#" class="back-btn">↑ Back to Top</a>
+        </div>
+
+        <!-- FINALS EXERCISE #4 — Exploring XML -->
+        <div class="exercise-container" id="ysabel-finals-ex4">
+            <h2>FINALS Lab Exercise #4 — Exploring XML</h2>
+
+            <h3>XML Code:</h3>
+            <div class="code-block">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;students&gt;
+  &lt;student&gt;
+    &lt;id&gt;001&lt;/id&gt;
+    &lt;name&gt;Maria Santos&lt;/name&gt;
+    &lt;course&gt;BSIT&lt;/course&gt;
+    &lt;year&gt;3&lt;/year&gt;
+  &lt;/student&gt;
+  &lt;student&gt;
+    &lt;id&gt;002&lt;/id&gt;
+    &lt;name&gt;Jose Cruz&lt;/name&gt;
+    &lt;course&gt;BSCS&lt;/course&gt;
+    &lt;year&gt;2&lt;/year&gt;
+  &lt;/student&gt;
+  &lt;student&gt;
+    &lt;id&gt;003&lt;/id&gt;
+    &lt;name&gt;Lozada Ysabel&lt;/name&gt;
+    &lt;course&gt;BSIT&lt;/course&gt;
+    &lt;year&gt;3&lt;/year&gt;
+  &lt;/student&gt;
+&lt;/students&gt;
+            </div>
+
+            <a href="#" class="back-btn">↑ Back to Top</a>
+        </div>
+
+        <a href="index.html" class="back-link">← Back to Main Page</a>
+    </div>
+
+</body>
+</html>

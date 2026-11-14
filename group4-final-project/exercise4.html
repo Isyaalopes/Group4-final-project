@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 4 - POST Method</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>GROUP 4 FINAL PROJECT</h1>
+    </header>
+
+    <div class="exercise-container">
+        <h2>Exercise #4 - POST Method</h2>
+
+        <h3>HTML Code:</h3>
+        <div class="code-block">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Group Members — POST Method&lt;/title&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="page-container"&gt;
+        &lt;div class="page-header"&gt;
+            &lt;h1&gt;WELCOME TO OUR GROUP PAGE&lt;/h1&gt;
+            &lt;p class="intro"&gt;This page introduces our group members and the roles they handle in the project. It also shows how we work together to create and complete our project successfully.&lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;div class="top-row-joaquin"&gt;
+            &lt;img src="plmun-logo.png" alt="PLMUN Logo" class="side-logo plmun-logo"&gt;
+            &lt;div class="member-card card-1"&gt;
+                &lt;div class="member-photo"&gt;
+                    &lt;img src="photo-joaquin.jpg" alt="Joaquin Bendulo"&gt;
+                &lt;/div&gt;
+                &lt;div class="member-info"&gt;
+                    &lt;h3&gt;Joaquin Bendulo&lt;/h3&gt;
+                    &lt;h4&gt;Project Manager&lt;/h4&gt;
+                    &lt;p class="role-desc"&gt;Manages the team, assigns tasks, and makes sure the project is completed on time&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;img src="citcs-logo.png" alt="CITCS Logo" class="side-logo citcs-logo"&gt;
+        &lt;/div&gt;
+
+        &lt;div class="layout-grid"&gt;
+            &lt;div class="member-card card-2"&gt;
+                &lt;div class="member-photo"&gt;
+                    &lt;img src="photo-ishshah.jpg" alt="Ishshah Lopez"&gt;
+                &lt;/div&gt;
+                &lt;div class="member-info"&gt;
+                    &lt;h3&gt;Ishshah Lopez&lt;/h3&gt;
+                    &lt;h4&gt;UX Designer &amp; Back-end Developer&lt;/h4&gt;
+                    &lt;p class="role-desc"&gt;Designs a user-friendly experience and develops the system's back-end functions&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="member-card card-3"&gt;
+                &lt;div class="member-photo"&gt;
+                    &lt;img src="photo-pauleen.jpg" alt="Pauleen Crispino"&gt;
+                &lt;/div&gt;
+                &lt;div class="member-info"&gt;
+                    &lt;h3&gt;Pauleen Crispino&lt;/h3&gt;
+                    &lt;h4&gt;UX Designer &amp; Back-end Developer&lt;/h4&gt;
+                    &lt;p class="role-desc"&gt;Improves the user experience while building and managing the system's back-end features&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="member-card card-4"&gt;
+                &lt;div class="member-photo"&gt;
+                    &lt;img src="photo-marvin.jpg" alt="Marvin Espina"&gt;
+                &lt;/div&gt;
+                &lt;div class="member-info"&gt;
+                    &lt;h3&gt;Marvin Espina&lt;/h3&gt;
+                    &lt;h4&gt;UI Designer &amp; Front-end Developer&lt;/h4&gt;
+                    &lt;p class="role-desc"&gt;Designs the system interface and implements its front-end features&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="member-card card-5"&gt;
+                &lt;div class="member-photo"&gt;
+                    &lt;img src="photo-jhamez.jpg" alt="Jhamez Stanley Guarico"&gt;
+                &lt;/div&gt;
+                &lt;div class="member-info"&gt;
+                    &lt;h3&gt;Jhamez Stanley Guarico&lt;/h3&gt;
+                    &lt;h4&gt;UI Designer &amp; Front-end Developer&lt;/h4&gt;
+                    &lt;p class="role-desc"&gt;Creates the visual design and develops the interactive front-end of the system.&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="member-card card-6"&gt;
+                &lt;div class="member-photo"&gt;
+                    &lt;img src="photo-ysabel.jpg" alt="Ysabel Lozada"&gt;
+                &lt;/div&gt;
+                &lt;div class="member-info"&gt;
+                    &lt;h3&gt;Ysabel Lozada&lt;/h3&gt;
+                    &lt;h4&gt;QA Tester&lt;/h4&gt;
+                    &lt;p class="role-desc"&gt;Checks the system's functionality and identifies bugs that need to be fixed.&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="member-card card-7"&gt;
+                &lt;div class="member-photo"&gt;
+                    &lt;img src="photo-paul.jpg" alt="Paul Andrew Ponteras"&gt;
+                &lt;/div&gt;
+                &lt;div class="member-info"&gt;
+                    &lt;h3&gt;Paul Andrew Ponteras&lt;/h3&gt;
+                    &lt;h4&gt;QA Tester&lt;/h4&gt;
+                    &lt;p class="role-desc"&gt;Tests the system to find errors and checks if its features work properly&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div class="form-section"&gt;
+            &lt;h2&gt;Submit Your Information (POST Method)&lt;/h2&gt;
+            &lt;form method="post" action="post.php"&gt;
+                &lt;label for="fullname"&gt;Full Name:&lt;/label&gt;
+                &lt;input type="text" id="fullname" name="full_name" placeholder="Enter your name" required&gt;
+
+                &lt;label for="role"&gt;Role / Position:&lt;/label&gt;
+                &lt;input type="text" id="role" name="user_role" placeholder="Enter your role" required&gt;
+
+                &lt;button type="submit"&gt;Submit Using POST&lt;/button&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        </div>
+
+        <h3>CSS Code:</h3>
+        <div class="code-block">
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #2E6F40;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 30px 20px;
+    line-height: 1.6;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+}
+
+.page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    margin-bottom: 8px;
+}
+
+.intro {
+    color: #e6f9e9;
+    font-size: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.top-row-joaquin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 30px;
+}
+
+.side-logo {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    flex-shrink: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+}
+
+.top-row-joaquin .member-card {
+    width: 350px;
+    flex-shrink: 0;
+}
+
+.layout-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card-2 { grid-column: 1 / 2; }
+.card-3 { grid-column: 2 / 3; }
+.card-4 { grid-column: 3 / 4; }
+.card-5 { grid-column: 1 / 2; }
+.card-6 { grid-column: 2 / 3; }
+.card-7 { grid-column: 3 / 4; }
+
+.member-card {
+    background-color: #CFFFDC;
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    transition: transform 0.3s ease;
+    width: 100%;
+}
+
+.member-card:hover {
+    transform: scale(1.03);
+}
+
+.member-photo {
+    flex-shrink: 0;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #2E6F40;
+}
+
+.member-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.member-info {
+    flex: 1;
+}
+
+.member-info h3 {
+    color: #1a472a;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.member-info h4 {
+    color: #2E6F40;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.role-desc {
+    color: #5a8c6b;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.form-section {
+    margin-top: 50px;
+    background-color: #CFFFDC;
+    border-radius: 14px;
+    padding: 30px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-section h2 {
+    color: #1a472a;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.form-section label {
+    display: block;
+    color: #2E6F40;
+    font-weight: 500;
+    margin-bottom: 6px;
+    margin-top: 12px;
+}
+
+.form-section input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid #8fc99f;
+    border-radius: 8px;
+    font-size: 15px;
+    background-color: #ffffff;
+}
+
+.form-section button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #2E6F40;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-section button:hover {
+    background-color: #245733;
+}
+
+@media (max-width: 900px) {
+    .top-row-joaquin {
+        flex-direction: column;
+    }
+    .top-row-joaquin .member-card {
+        width: 100%;
+        order: 2;
+    }
+    .plmun-logo { order: 1; }
+    .citcs-logo { order: 3; }
+    .layout-grid {
+        grid-template-columns: 1fr;
+    }
+    .card-2, .card-3, .card-4, .card-5, .card-6, .card-7 {
+        grid-column: 1 / 2;
+    }
+}
+        </div>
+
+        <h3>PHP Code:</h3>
+        <div class="code-block">
+&lt;?php
+echo '&lt;link rel="stylesheet" type="text/css" href="post.css"&gt;';
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" &amp;&amp; !empty($_POST)) {
+
+    $fullName = trim($_POST["full_name"]);
+    $userRole = trim($_POST["user_role"]);
+
+    $fullName = htmlspecialchars($fullName);
+    $userRole = htmlspecialchars($userRole);
+
+    echo "&lt;div class='result-container'&gt;";
+    echo "&lt;div class='result-box'&gt;";
+    echo "&lt;h2&gt;REQUEST RESULT&lt;/h2&gt;";
+    echo "&lt;p class='success'&gt;Request Received Successfully!&lt;/p&gt;";
+    echo "&lt;hr&gt;";
+    echo "&lt;p&gt;&lt;strong&gt;Full Name:&lt;/strong&gt; $fullName&lt;/p&gt;";
+    echo "&lt;p&gt;&lt;strong&gt;Role / Position:&lt;/strong&gt; $userRole&lt;/p&gt;";
+    echo "&lt;hr&gt;";
+    echo "&lt;p class='method-used'&gt;Used &lt;strong&gt;POST Method&lt;/strong&gt; in Request&lt;/p&gt;";
+    echo "&lt;p class='note'&gt;Data is HIDDEN from URL address bar ↑&lt;/p&gt;";
+    echo "&lt;a href='index.html' class='back-btn'&gt;← Go Back to Form&lt;/a&gt;";
+    echo "&lt;/div&gt;";
+    echo "&lt;/div&gt;";
+
+} else {
+    echo "&lt;div class='result-container'&gt;";
+    echo "&lt;div class='result-box error-box'&gt;";
+    echo "&lt;h2&gt;NO DATA RECEIVED&lt;/h2&gt;";
+    echo "&lt;p&gt;Please fill out the form first.&lt;/p&gt;";
+    echo "&lt;a href='index.html' class='back-btn'&gt;← Go Back to Form&lt;/a&gt;";
+    echo "&lt;/div&gt;";
+    echo "&lt;/div&gt;";
+}
+?&gt;
+        </div>
+
+        <h3>Post CSS Code:</h3>
+        <div class="code-block">
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #2E6F40;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 60px 20px;
+    line-height: 1.8;
+}
+
+.result-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
+
+.result-box {
+    background-color: #CFFFDC;
+    border-radius: 14px;
+    padding: 40px 30px;
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.result-box h2 {
+    color: #1a472a;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.success {
+    color: #2E6F40;
+    font-weight: 500;
+    font-size: 17px;
+    margin-bottom: 20px;
+}
+
+.result-box hr {
+    border: none;
+    border-top: 2px solid #8fc99f;
+    margin: 15px 0;
+}
+
+.result-box p {
+    color: #2E6F40;
+    font-size: 16px;
+    margin: 8px 0;
+}
+
+.method-used {
+    color: #1a472a;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.note {
+    color: #5a8c6b;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.error-box h2 {
+    color: #8B0000;
+}
+
+.error-box p {
+    color: #a04444;
+}
+
+.back-btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 24px;
+    background-color: #2E6F40;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.back-btn:hover {
+    background-color: #245733;
+}
+        </div>
+
+        <h3>Output:</h3>
+        <div class="output-grid">
+            <div class="output-item">
+                <img src="ex4-output-1.jpg" alt="Output 1 - Group Page & Form">
+                <p>Group Page & Form</p>
+            </div>
+            <div class="output-item">
+                <img src="ex4-output-2.jpg" alt="Output 2 - Result Page">
+                <p>Result Page</p>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-btn">← Back to Activities</a>
+    </div>
+
+</body>
+</html>

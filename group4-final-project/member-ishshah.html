@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ishshah — Finals Activities</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>GROUP 4 FINAL PROJECT</h1>
+    </header>
+
+    <div class="member-page-container">
+
+        <div class="member-profile-header">
+            <img src="photo-ishshah.jpg" alt="Ishshah" class="member-avatar">
+            <h2>Ishshah</h2>
+            <p class="role">Assistant Leader — UX Designer / Back-End Developer</p>
+        </div>
+
+        <!-- FINALS EXERCISE #1 — Basic JSON Encoding -->
+        <div class="exercise-container" id="ishshah-finals-ex1">
+            <h2>FINALS Lab Exercise #1 — Basic JSON Encoding</h2>
+
+            <!-- LAB 1 -->
+            <h3>Lab 1 — PHP Array to JSON</h3>
+            <h3>PHP Code:</h3>
+            <div class="code-block">
+&lt;?php
+$student = [
+    "name" =&gt; "Maria",
+    "age" =&gt; 21,
+    "course" =&gt; "IT"
+];
+
+$jsonData = json_encode($student);
+
+echo $jsonData;
+?&gt;
+            </div>
+
+            <!-- LAB 2 -->
+            <h3>Lab 2 — JSON Decode</h3>
+            <h3>PHP Code:</h3>
+            <div class="code-block">
+&lt;?php
+$json = '{"name":"Maria","age":20,"email":"maria@example.com"}';
+
+$object = json_decode($json);
+
+$array = json_decode($json, true);
+
+echo "Object: " . $object-&gt;name . PHP_EOL;
+echo "Array: " . $array['email'];
+?&gt;
+            </div>
+
+            <!-- LAB 3 -->
+            <h3>Lab 3 — JSON Response with Header</h3>
+            <h3>PHP Code:</h3>
+            <div class="code-block">
+&lt;?php
+header('Content-Type: application/json');
+
+$user = [
+    "id" =&gt; 1,
+    "name" =&gt; "Maria",
+    "email" =&gt; "maria@example.com",
+    "status" =&gt; "active"
+];
+
+echo json_encode($user);
+?&gt;
+            </div>
+
+            <!-- LAB 4 -->
+            <h3>Lab 4 — Sending JSON Data</h3>
+            <h3>HTML & JavaScript Code:</h3>
+            <div class="code-block">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Lab 4 JSON Input&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h2&gt;Lab 4: Handling JSON Input&lt;/h2&gt;
+
+    &lt;button onclick="sendJSON()"&gt;Send JSON&lt;/button&gt;
+
+    &lt;pre id="output"&gt;&lt;/pre&gt;
+
+    &lt;script&gt;
+        async function sendJSON() {
+            const response = await fetch("lab4_input.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    username: "admin",
+                    password: "1234"
+                })
+            });
+
+            const result = await response.text();
+            document.getElementById("output").textContent = result;
+        }
+    &lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+            </div>
+
+            <h3>PHP Code — lab4_input.php:</h3>
+            <div class="code-block">
+&lt;?php
+$json = file_get_contents('php://input');
+$data = json_decode($json);
+
+echo "Username: " . $data-&gt;username . "\n";
+echo "Password: " . $data-&gt;password;
+?&gt;
+            </div>
+
+            <!-- LAB 5 -->
+            <h3>Lab 5 — AJAX and JSON</h3>
+            <h3>HTML & JavaScript Code:</h3>
+            <div class="code-block">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Lab 5 - AJAX and JSON&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h2&gt;Welcome Form&lt;/h2&gt;
+
+    &lt;form id="userForm"&gt;
+        &lt;label&gt;Enter your name:&lt;/label&gt;
+        &lt;input type="text" id="name" required&gt;
+
+        &lt;button type="submit"&gt;Submit&lt;/button&gt;
+    &lt;/form&gt;
+
+    &lt;p id="result"&gt;&lt;/p&gt;
+
+    &lt;script&gt;
+        document.getElementById("userForm")
+        .addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            let name = document.getElementById("name").value;
+
+            try {
+                let response = await fetch("lab5_process.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ name: name })
+                });
+
+                if (!response.ok) {
+                    throw new Error("Request failed");
+                }
+
+                let data = await response.json();
+                document.getElementById("result")
+                    .textContent = JSON.stringify(data);
+
+            } catch (error) {
+                document.getElementById("result")
+                    .textContent = "Error: " + error.message;
+            }
+        });
+    &lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+            </div>
+
+            <h3>PHP Code — lab5_process.php:</h3>
+            <div class="code-block">
+&lt;?php
+header('Content-Type: application/json');
+
+$json = file_get_contents("php://input");
+$data = json_decode($json, true);
+
+$name = trim($data["name"] ?? "");
+
+if ($name !== "") {
+    $response = [
+        "status" =&gt; "success",
+        "message" =&gt; "Welcome, " . $name . "!"
+    ];
+} else {
+    $response = [
+        "status" =&gt; "error",
+        "message" =&gt; "Please enter your name."
+    ];
+}
+
+echo json_encode($response);
+?&gt;
+            </div>
+
+            <h3>Output:</h3>
+            <div class="output-grid">
+                <div class="output-item">
+                    <img src="ishshah-ex1-1.jpg" alt="Lab 1 Output">
+                    <p>Lab 1 — PHP Array to JSON</p>
+                </div>
+                <div class="output-item">
+                    <img src="ishshah-ex1-2.jpg" alt="Lab 2 Output">
+                    <p>Lab 2 — JSON Decode</p>
+                </div>
+                <div class="output-item">
+                    <img src="ishshah-ex1-3.jpg" alt="Lab 3 Output">
+                    <p>Lab 3 — JSON Response</p>
+                </div>
+                <div class="output-item">
+                    <img src="ishshah-ex1-4.jpg" alt="Lab 4 Output">
+                    <p>Lab 4 — Send JSON Data</p>
+                </div>
+                <div class="output-item">
+                    <img src="ishshah-ex1-5.jpg" alt="Lab 5 Output">
+                    <p>Lab 5 — AJAX and JSON</p>
+                </div>
+            </div>
+
+            <a href="#" class="back-btn">↑ Back to Top</a>
+        </div>
+
+
+        <!-- FINALS EXERCISE #2 — XMLHttpRequest -->
+        <div class="exercise-container" id="ishshah-finals-ex2">
+            <h2>FINALS Lab Exercise #2 — XMLHttpRequest</h2>
+
+            <h3>HTML & JavaScript Code:</h3>
+            <div class="code-block">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;XMLHttpRequest Lab&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;h2&gt;Exploring XMLHttpRequest&lt;/h2&gt;
+
+    &lt;button id="loadData"&gt;Load Post Data&lt;/button&gt;
+
+    &lt;div id="output" style="margin-top:20px; border:1px solid #ddd; padding:10px;"&gt;
+    &lt;/div&gt;
+
+    &lt;script&gt;
+        document.getElementById("loadData").addEventListener("click", function() {
+
+            const xhr = new XMLHttpRequest();
+            const output = document.getElementById("output");
+
+            output.textContent = "Loading...";
+
+            xhr.onreadystatechange = function() {
+
+                if (xhr.readyState === 4) {
+
+                    if (xhr.status === 200) {
+
+                        const data = JSON.parse(xhr.responseText);
+
+                        output.textContent = "Post Title: " + data.title +
+                            "\n\nContent: " + data.body;
+
+                        output.style.whiteSpace = "pre-line";
+                        output.style.color = "black";
+
+                    } else {
+
+                        output.textContent = "Error: " + xhr.status;
+                        output.style.color = "red";
+
+                    }
+                }
+            };
+
+            xhr.onerror = function() {
+                output.textContent = "Network error occurred.";
+                output.style.color = "red";
+            };
+
+            xhr.open("GET", "https://jsonplaceholder.typicode.com/posts/1", true);
+            xhr.send();
+
+        });
+    &lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+            </div>
+
+            <h3>Output:</h3>
+            <div class="output-grid">
+                <div class="output-item">
+                    <img src="ishshah-ex2-1.jpg" alt="Output">
+                    <p>Output</p>
+                </div>
+            </div>
+
+            <a href="#" class="back-btn">↑ Back to Top</a>
+        </div>
+
+        <!-- FINALS EXERCISE #3 — Fetch API -->
+        <div class="exercise-container" id="ishshah-finals-ex3">
+            <h2>FINALS Lab Exercise #3 — Exploring the Fetch API</h2>
+
+            <h3>HTML, CSS & JavaScript Code:</h3>
+            <div class="code-block">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Fetch API Lab Exercise 3&lt;/title&gt;
+
+    &lt;style&gt;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #output {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+            min-height: 60px;
+            white-space: pre-line;
+        }
+
+        .error {
+            color: red;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+    &lt;div class="container"&gt;
+        &lt;h2&gt;Exploring the Fetch API&lt;/h2&gt;
+
+        &lt;button id="loadData"&gt;Load Post Data (GET)&lt;/button&gt;
+        &lt;button id="createPost"&gt;Create Post (POST)&lt;/button&gt;
+
+        &lt;div id="output"&gt;Click a button to start.&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script&gt;
+        const output = document.getElementById("output");
+
+        // TASK 2: GET REQUEST
+        document.getElementById("loadData")
+        .addEventListener("click", function() {
+
+            output.classList.remove("error");
+            output.textContent = "Loading post data...";
+
+            fetch("https://jsonplaceholder.typicode.com/posts/1")
+
+                .then(response =&gt; {
+                    if (!response.ok) {
+                        throw new Error(
+                            "HTTP Error: " + response.status
+                        );
+                    }
+                    return response.json();
+                })
+
+                .then(data =&gt; {
+                    output.textContent =
+                        "Post Title: " + data.title +
+                        "\n\nContent: " + data.body;
+                })
+
+                .catch(error =&gt; {
+                    output.classList.add("error");
+                    output.textContent =
+                        "Error: " + error.message;
+                });
+        });
+
+
+        // TASK 3: POST REQUEST
+        document.getElementById("createPost")
+        .addEventListener("click", function() {
+
+            output.classList.remove("error");
+            output.textContent = "Creating new post...";
+
+            fetch("https://jsonplaceholder.typicode.com/posts", {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    title: "My New Post",
+                    body: "Learning Fetch API is fun!",
+                    userId: 1
+                })
+            })
+
+            .then(response =&gt; {
+                if (!response.ok) {
+                    throw new Error(
+                        "HTTP Error: " + response.status
+                    );
+                }
+                return response.json();
+            })
+
+            .then(data =&gt; {
+                output.textContent =
+                    "New Post Created!\n" +
+                    "Post ID: " + data.id;
+            })
+
+            .catch(error =&gt; {
+                output.classList.add("error");
+                output.textContent =
+                    "Error: " + error.message;
+            });
+        });
+    &lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+            </div>
+
+            <h3>Output:</h3>
+            <div class="output-grid">
+                <div class="output-item">
+                    <img src="ishshah-ex3-1.jpg" alt="GET Request — Load Post Data">
+                    <p>GET Request — Load Post Data</p>
+                </div>
+                <div class="output-item">
+                    <img src="ishshah-ex3-2.jpg" alt="POST Request — Create Post">
+                    <p>POST Request — Create Post</p>
+                </div>
+            </div>
+
+            <a href="#" class="back-btn">↑ Back to Top</a>
+        </div>
+
+        <!-- FINALS EXERCISE #4 — Exploring XML -->
+        <div class="exercise-container" id="ishshah-finals-ex4">
+            <h2>FINALS Lab Exercise #4 — Exploring XML</h2>
+
+            <h3>XML Code:</h3>
+            <div class="code-block">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;students&gt;
+    &lt;student&gt;
+        &lt;id&gt;001&lt;/id&gt;
+        &lt;name&gt;Maria Santos&lt;/name&gt;
+        &lt;course&gt;BSIT&lt;/course&gt;
+        &lt;year&gt;3&lt;/year&gt;
+    &lt;/student&gt;
+
+    &lt;student&gt;
+        &lt;id&gt;002&lt;/id&gt;
+        &lt;name&gt;Jose Cruz&lt;/name&gt;
+        &lt;course&gt;BSCS&lt;/course&gt;
+        &lt;year&gt;2&lt;/year&gt;
+    &lt;/student&gt;
+
+    &lt;student&gt;
+        &lt;id&gt;003&lt;/id&gt;
+        &lt;name&gt;Ishshah C. Lopez&lt;/name&gt;
+        &lt;course&gt;BSIT&lt;/course&gt;
+        &lt;year&gt;3&lt;/year&gt;
+    &lt;/student&gt;
+&lt;/students&gt;
+            </div>
+
+            <a href="#" class="back-btn">↑ Back to Top</a>
+        </div>
+
+        <a href="index.html" class="back-link">← Back to Main Page</a>
+    </div>
+
+</body>
+</html>
